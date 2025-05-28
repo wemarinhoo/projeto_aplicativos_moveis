@@ -10,26 +10,27 @@ class Bitcoin extends StatefulWidget {
 }
 
 class BitcoinState extends State<Bitcoin> {
-
   String _preco = "0";
 
   void _recuperarPreco() async {
-
-    // "https://blockchain.info/ticker";
     var url = Uri.https("blockchain.info", "ticker");
+    
     // Implementar o método de requisição
     http.Response response = await http.get(url);
+    
     // Implementar converter o retorno para JSON
-    Map<String, dynamic> retorno = json.decode( response.body );
+    Map<String, dynamic> retorno = json.decode(response.body);
 
     setState(() {
-      // Implementar a lógica para atualizar o preço
-      // do Bitcoin em Reais
-      // O preço do Bitcoin em Reais está na chave "BRL"
-      // e o valor do preço está na chave "buy"
-      _preco = "Implementar o preço do Bitcoin em Reais";
+      // Implementar a lógica para atualizar o preço do Bitcoin em Reais
+      // O preço do Bitcoin em Reais está na chave "BRL" e o valor do preço está na chave "buy"
+      if (retorno.containsKey("BRL")) {
+        double precoBitcoin = retorno["BRL"]["buy"];
+        _preco = "R\$ ${precoBitcoin.toStringAsFixed(2)}";
+      } else {
+        _preco = "Erro ao obter preço";
+      }
     });
-
   }
 
   @override
@@ -37,7 +38,7 @@ class BitcoinState extends State<Bitcoin> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Título tela"),
+        title: Text("Bitcoin"),
         backgroundColor: Colors.orange,
         foregroundColor: Colors.white,
         centerTitle: false,
@@ -51,9 +52,11 @@ class BitcoinState extends State<Bitcoin> {
               Image.asset("images/bitcoin.png", height: 70),
               Padding(
                 padding: EdgeInsets.only(top: 30, bottom: 30),
-                child: Text("Valor do Bitcoin",
+                child: Text(
+                  "R\$ $_preco",
                   style: TextStyle(
-                    fontSize: 35
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
@@ -62,8 +65,12 @@ class BitcoinState extends State<Bitcoin> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
                   foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 ),
-                child: Text("Atualizar"),
+                child: Text(
+                  "Atualizar",
+                  style: TextStyle(fontSize: 18),
+                ),
               )
             ],
           ),
