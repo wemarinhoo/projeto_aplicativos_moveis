@@ -43,8 +43,43 @@ class TelaServicoState extends State<TelaServico> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-
-                    // Implementar a lista de serviços
+                    Text("* Planejamento",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black
+                      ),
+                    ),
+                    Text("* Auditoria",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black
+                      ),
+                    ),
+                    Text("* Acompanhamento de Projetos",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black
+                      ),
+                    ),
+                    Text("* Treinamentos",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black
+                      ),
+                    ),
+                    Text("* Assesoria",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black
+                      ),
+                    ),
+                    Text("* Consultoria em TI",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black
+                      ),
+                    ),
+                    
                   
                   ],
                 ),
